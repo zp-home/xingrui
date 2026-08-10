@@ -1,0 +1,13 @@
+# Local IDE and Python environment files
+.idea/
+.venv/
+__pycache__/
+*.pyc
+
+# Temporary Microsoft Office lock files
+~$*
+
+# Local environment files
+.env
+.env.*
+!.env.example
