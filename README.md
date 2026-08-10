@@ -1,3 +1,5 @@
 # Xingrui Test Project
 
-This repository contains the two test-project implementations and the original test document.
+笔试题
+开发工具 pycharm
+上传过程中手动过滤了 虚拟环境 .idea等文件
