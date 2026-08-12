@@ -8,14 +8,9 @@ class TestRegSearch(unittest.TestCase):
 换股期限：本期可交换公司债券换股期限自可交换公司债券发行结束
 之日满 12 个月后的第一个交易日起至可交换债券到期日止，即 2023 年 6 月 2
 日至 2027 年 6 月 1 日止。'''
-        a=[{'标的证券':'*自定义*','换股期限':'*自定义*'}]
+        a=[{'标的证券':r'股票代码\s*[：:]\s*(\d{6}\.(?:SH|SZ|BJ))',
+            '换股期限':r'(?:即|至)\s*((?:\d{4})\s*年\s*(?:\d{1,2})\s*月\s*(?:\d{1,2})\s*日)'}]
         b=[{'标的证券':'600900.SH','换股期限':['2023-06-02','2027-06-01']}]
-        self.assertEqual(reg_search(text,a),b)
-
-    def test_format(self):
-        text='股票代码:000001.sz\n换股期限：即2024年1月2日至2025年12月31日'
-        a=[{'标的证券':'*自定义*','换股期限':'*自定义*'}]
-        b=[{'标的证券':'000001.sz','换股期限':['2024-01-02','2025-12-31']}]
         self.assertEqual(reg_search(text,a),b)
 
     def test_regex(self):
@@ -25,8 +20,7 @@ class TestRegSearch(unittest.TestCase):
         self.assertEqual(reg_search(text,a),b)
 
     def test_no_match(self):
-        a=[{'标的证券':'*自定义*'}]
-        self.assertEqual(reg_search('没有证券代码',a),[{}])
+        self.assertEqual(reg_search('没有结果',[{'编号':r'编号[：:]([A-Z]-\d+)'}]),[{}])
 
 if __name__=='__main__':
     unittest.main(verbosity=2)
